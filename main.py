@@ -32,5 +32,5 @@ print(df["belongs_to_collection"])
 df.info()
 
 df.dropna(inplace=True)
-print(df.isnull(),sum())
+print(df.isnull().sum())
 df.info()
