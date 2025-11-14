@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+import ast
 
 url = "data/movies_metadata.csv"
 
@@ -37,11 +38,24 @@ df = pd.read_csv(url)
 # df.dropna(inplace=True)
 # print(df.isnull().sum())
 # df.info()
+#------------------------------
 
+def extract_genres(genre_str):
+    try:
+        genres = ast.literal_eval(genre_str)
+        return [genre['name'] for genre in genres]
+    except ValueError:
+        return []
+
+# print(extract_genres(df['genres'].value_counts()))
+print(df['genres'].apply(extract_genres))
+df['genres'] = df['genres'].apply(extract_genres)
+#------------------------------
 # print(df.head())
 # print(df.genres)
-genres_counts = df['genres'].value_counts()
-print(genres_counts)
+all_genres = df['genres'].explode()
+genres_counts = all_genres.value_counts()
+# print(genres_counts)
 # print(genres_counts.index)
 # print(genres_counts.values)
 
