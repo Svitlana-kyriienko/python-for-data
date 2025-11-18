@@ -48,3 +48,4 @@ movies_df = pd.read_csv('data/movies_metadata.csv')
 
 pd.options.display.max_rows = 10
 print(pd.options.display.max_rows)
+
